@@ -15,11 +15,10 @@ pred = zeros(1, size(data, 2));
 %  Instructions: Compute pred using theta assuming that the labels start 
 %                from 1.
 
-
-
-
-
-
+% size(theta)
+% size(data)
+y = theta * data;
+[mx, pred] = max(y);
 
 
 % ---------------------------------------------------------------------

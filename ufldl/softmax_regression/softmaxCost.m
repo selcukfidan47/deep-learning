@@ -23,16 +23,30 @@ thetagrad = zeros(numClasses, inputSize);
 %                You need to compute thetagrad and cost.
 %                The groundTruth matrix might come in handy.
 
+pred = theta * data;
+% subtract the maximum value of each column
+pred = bsxfun(@minus, pred, max(pred, [], 1));
+pred = exp(pred);
+% normalization to a valid probability distribution
+pred = bsxfun(@rdivide, pred, sum(pred));
 
+% for i = 1:numCases
+%     cost = cost + groundTruth(:, i) .* log(pred(:, i));
+% end
 
+cost = cost + sum(sum(groundTruth .* log(pred)));
+cost = cost * (-1.0 / numCases) + (lambda / 2) * sum(sum(theta .* theta));
 
+% compute gradient
+% for i = 1:numClasses
+%     diff = groundTruth(i, :) - pred(i, :);
+%     diff = repmat(diff, inputSize, 1);
+%     total = sum(data .* diff, 2)';
+%     thetagrad(i, :) = (-1.0 / numCases) * total + lambda * theta(i, :);
+% end
 
-
-
-
-
-
-
+% vectorized implementation can significantly speed up the training phase
+thetagrad = lambda * theta + (-1.0 / numCases) * ((groundTruth - pred) * data');
 
 % ------------------------------------------------------------------
 % Unroll the gradient matrices into a vector for minFunc
