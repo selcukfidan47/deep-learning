@@ -25,16 +25,11 @@ patches = zeros(patchsize*patchsize, numpatches);
 %  Image 1
 
 for i = 1:numpatches
-    x = randi(512 - 8);
-    y = randi(512 - 8);
+    x = randi(512 - 7);
+    y = randi(512 - 7);
     sample = IMAGES(x:x+7, y:y+7, randi(1) * 10);
-    patch(:, i) = sample(:);
+    patches(:, i) = sample(:);
 end
-
-
-
-
-
 
 
 %% ---------------------------------------------------------------

@@ -101,7 +101,6 @@ W2grad = delta_3 * a_2'/m  + lambda * W2; % 25 64
 W1grad = delta_2 * data'/m + lambda * W1; % 25 64
 
 
-
 %-------------------------------------------------------------------
 % After computing the cost and gradient, we will convert the gradients back
 % to a vector format (suitable for minFunc).  Specifically, we will unroll

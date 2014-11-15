@@ -20,7 +20,10 @@ numgrad = zeros(size(theta));
 
 eps = 0.0001;
 for i = 1:size(theta)
-    numgrad(i) = (J(theta(i) + eps) - J(theta(i) - eps)) / (2 * eps);
+    t1 = theta; t2 = theta;
+    t1(i) = theta(i) + eps;
+    t2(i) =  theta(i) - eps;
+    numgrad(i) = (J(t1) - J(t2)) / (2 * eps);
 end
 
 %% ---------------------------------------------------------------
