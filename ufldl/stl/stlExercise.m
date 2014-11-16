@@ -126,7 +126,7 @@ lambda = 1e-4;
 
 options.maxIter = 100;
 fprintf('start to train softmax classifier...\n');
-softmaxModel = softmaxTrain(inputSize, numLabels, lambda, ...
+softmaxModel = softmaxTrain(hiddenSize, numLabels, lambda, ...
                             trainFeatures, trainLabels, options);
                           
 
