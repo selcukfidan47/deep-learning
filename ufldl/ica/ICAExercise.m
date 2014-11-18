@@ -50,8 +50,12 @@ patches = ZCAWhite * patches;
 
 % Use less features and smaller patches for speed
 numFeatures = 5;
-patches = patches(1:3, 1:5);
-visibleSize = 3;
+patches = patches(1:5, 1:5);
+% ATTENTION: original parameter setting is really misleading, visibleSize = 3 < numFeatures will make it impossible
+%            to learn orthonormal basis.
+%            furthermore, numFeatures is not a square number, which makes displayColorNetwork() function fails 
+%            to execute.
+visibleSize = 5;
 numPatches = 5;
 
 weightMatrix = rand(numFeatures, visibleSize);
@@ -61,6 +65,8 @@ weightMatrix = rand(numFeatures, visibleSize);
 numGrad = computeNumericalGradient( @(x) orthonormalICACost(x, visibleSize, numFeatures, patches, epsilon), weightMatrix(:) );
 % Uncomment to display the numeric and analytic gradients side-by-side
 % disp([numGrad grad]); 
+% size(numGrad)
+% size(grad)
 diff = norm(numGrad-grad)/norm(numGrad+grad);
 fprintf('Orthonormal ICA difference: %g\n', diff);
 assert(diff < 1e-7, 'Difference too large. Check your analytic gradients.');
@@ -118,15 +124,16 @@ for iteration = 1:10000
         %   using the checking code below. After you have verified your
         %   code, comment out the checking code before running the
         %   optimization.
-        
         % Project considerWeightMatrix such that it satisfies WW^T = I
-        error('Fill in the code for the projection here');        
-        
+        considerWeightMatrix = ((considerWeightMatrix * considerWeightMatrix')^(-0.5)) * considerWeightMatrix;
+        % considerWeightMatrix = orth(considerWeightMatrix')';
+        % error('Fill in the code for the projection here');
         % Verify that the projection is correct
-        temp = considerWeightMatrix * considerWeightMatrix';
-        temp = temp - eye(numFeatures);
-        assert(sum(temp(:).^2) < 1e-23, 'considerWeightMatrix does not satisfy WW^T = I. Check your projection again');
-        error('Projection seems okay. Comment out verification code before running optimization.');
+        % temp = considerWeightMatrix * considerWeightMatrix';
+        % temp = temp - eye(numFeatures);        
+        % disp(sum(temp(:).^2));
+        % assert(sum(temp(:).^2) < 1e-23, 'considerWeightMatrix does not satisfy WW^T = I. Check your projection again');
+        % error('Projection seems okay. Comment out verification code before running optimization.');
         
         % -------------------- YOUR CODE HERE --------------------                                        
 

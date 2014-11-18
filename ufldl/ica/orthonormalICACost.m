@@ -11,7 +11,11 @@ function [cost, grad] = orthonormalICACost(theta, visibleSize, numFeatures, patc
     % Instructions:
     %   Write code to compute the cost and gradient with respect to the
     %   weights given in weightMatrix.     
-    % -------------------- YOUR CODE HERE --------------------     
+    % -------------------- YOUR CODE HERE --------------------
 
+    aux = weightMatrix * patches;
+    cost = sum(sum(sqrt(aux .* aux + epsilon)));
+    grad = (aux ./ sqrt(epsilon + aux .* aux)) * patches';
+    grad = grad(:);
 end
 
