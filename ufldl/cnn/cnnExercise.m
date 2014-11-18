@@ -39,9 +39,11 @@ poolDim = 19;          % dimension of pooling region
 % Train the sparse autoencoder and fill the following variables with 
 % the optimal parameters:
 
-optTheta =  zeros(2*hiddenSize*visibleSize+hiddenSize+visibleSize, 1);
-ZCAWhite =  zeros(visibleSize, visibleSize);
-meanPatch = zeros(visibleSize, 1);
+load 'STL10Features.mat';
+
+% optTheta =  zeros(2*hiddenSize*visibleSize+hiddenSize+visibleSize, 1);
+% ZCAWhite =  zeros(visibleSize, visibleSize);
+% meanPatch = zeros(visibleSize, 1);
 
 
 % --------------------------------------------------------------------
@@ -147,9 +149,6 @@ end
 
 stepSize = 50;
 assert(mod(hiddenSize, stepSize) == 0, 'stepSize should divide hiddenSize');
-
-% we need to make sure implemented pooling & convolution are correct
-pause;
 
 load stlTrainSubset.mat % loads numTrainImages, trainImages, trainLabels
 load stlTestSubset.mat  % loads numTestImages,  testImages,  testLabels
