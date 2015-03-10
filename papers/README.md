@@ -7,6 +7,8 @@ research papers related to deep learning.
 Shorthand List
 -------------------
 
-RL: Representation Learning
+<b>RL:</b> Representation Learning
 
-RNN: Recursive Neural Network
+<b>RNN:</b> Recursive Neural Network
+
+<b>CNN:</b> Convolutional Neural Network
