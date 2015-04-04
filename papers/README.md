@@ -12,3 +12,5 @@ Shorthand List
 <b>RNN:</b> Recursive Neural Network
 
 <b>CNN:</b> Convolutional Neural Network
+
+<b>SA:</b> Sentiment Analysis
